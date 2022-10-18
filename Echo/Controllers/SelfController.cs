@@ -9,16 +9,21 @@ namespace Echo.Controllers
     {
 
         [HttpGet(Name = "self")]
-        public string Get()
+        public EchoResponse Get()
         {
+            var response = new EchoResponse();
+            response.callerIp = HttpContext.Connection.RemoteIpAddress?.ToString();
+
             try
             {
-                return Dns.GetHostName();
+                response.message = Dns.GetHostName();
             }
             catch
             {
-                return HttpContext.Request.Host.Value;
+                response.message = HttpContext.Request.Host.Value;
             }
+
+            return response;
         }
     }
 }

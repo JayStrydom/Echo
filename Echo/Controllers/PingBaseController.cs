@@ -8,12 +8,15 @@ namespace Echo.Controllers
     public class PingBaseController : ControllerBase
     {
         [HttpGet(Name = "pingbase")]
-        public async Task<string> Get([FromQuery] string url)
+        public async Task<EchoResponse> Get([FromQuery] string url)
         {
+            var response = new EchoResponse();
+            response.callerIp = HttpContext.Connection.RemoteIpAddress?.ToString();
             byte[] data = Convert.FromBase64String(url);
             string decodedString = Encoding.UTF8.GetString(data);
             using var client = new HttpClient();
-            return await client.GetStringAsync(decodedString);
+            response.message = await client.GetStringAsync(decodedString);
+            return response;
         }
     }
 }

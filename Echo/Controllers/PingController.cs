@@ -7,10 +7,13 @@ namespace Echo.Controllers
     public class PingController : ControllerBase
     {
         [HttpGet(Name = "ping")]
-        public async Task<string> Get([FromQuery] string url)
+        public async Task<EchoResponse> Get([FromQuery] string url)
         {
+            var response = new EchoResponse();
+            response.callerIp = HttpContext.Connection.RemoteIpAddress?.ToString();
             using var client = new HttpClient();
-            return await client.GetStringAsync(url);
+            response.message = await client.GetStringAsync(url);
+            return response;
         }
     }
 }
