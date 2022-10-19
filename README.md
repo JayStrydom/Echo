@@ -23,12 +23,10 @@ Find the host names and IP addresses of the servers can clients. This is useful 
 
 For example:
 
-Website 1 (Hosted on Azure App Service)
-https://website1.azurewebsites.net
-
-Website 2 (Hosted on Azure App Service)
-https://website2.azurewebsites.net
+- Website 1 (Hosted on Azure App Service) https://website1.azurewebsites.net
+- Website 2 (Hosted on Azure App Service) https://website2.azurewebsites.net
 
 Use Website 1 to call Website 2 and discover the IP address and DNS name used:
+
 GET https://website1.azurewebsites.net/ping?url=https://website2.azurewebsites.net/self
 
